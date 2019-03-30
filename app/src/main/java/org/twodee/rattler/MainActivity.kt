@@ -8,10 +8,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.preference.PreferenceManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import java.io.File
@@ -21,6 +24,9 @@ class MainActivity : PermittedActivity() {
   private lateinit var notesBox: EditText
   private lateinit var titleBox: EditText
   private lateinit var beatsPerMinuteBox: EditText
+  private lateinit var songList: RecyclerView
+  private lateinit var editorRoot: View
+
   private lateinit var prefs: SharedPreferences
 
   private var player: MediaPlayer? = null
@@ -39,6 +45,8 @@ class MainActivity : PermittedActivity() {
     titleBox = findViewById(R.id.titleBox)
     beatsPerMinuteBox = findViewById(R.id.beatsPerMinuteBox)
     notesBox = findViewById(R.id.notesBox)
+    songList = findViewById(R.id.songList)
+    editorRoot = findViewById(R.id.editorRoot)
 
     titleBox.addTextChangedListener(object: TextWatcher {
       override fun afterTextChanged(p0: Editable?) {}
@@ -66,6 +74,18 @@ class MainActivity : PermittedActivity() {
         }
       }
     })
+
+    val adapter = SongAdapter() {
+      song = it
+      syncUI()
+
+      if (editorRoot.visibility == View.GONE) {
+        editorRoot.visibility = View.VISIBLE
+      }
+    }
+
+    songList.adapter = adapter
+    songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
     syncUI()
   }

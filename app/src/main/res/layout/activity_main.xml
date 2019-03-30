@@ -1,53 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".MainActivity">
 
-  <EditText
-    android:id="@+id/notesBox"
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/songList"
     android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="8dp"
-    android:ems="10"
-    android:gravity="top"
-    android:hint="Enter song..."
-    android:inputType="textMultiLine"
-    android:text="4c4 4c4 4g4 4g4 4a4 4a4 2g4"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/beatsPerMinuteBox" />
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@android:color/holo_orange_light"
+    android:scrollbars="vertical"
+    tools:listitem="@android:layout/simple_list_item_1" />
 
-  <EditText
-    android:id="@+id/titleBox"
+  <android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editorRoot"
     android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:ems="10"
-    android:hint="Song title..."
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent"
+    android:layout_weight="3"
+    android:visibility="gone">
 
-  <EditText
-    android:id="@+id/beatsPerMinuteBox"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:ems="10"
-    android:hint="Beats per minute..."
-    android:inputType="number"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/titleBox" />
-</android.support.constraint.ConstraintLayout>
+    <EditText
+      android:id="@+id/notesBox"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="8dp"
+      android:ems="10"
+      android:gravity="top"
+      android:hint="Enter song..."
+      android:inputType="textMultiLine"
+      android:text="4c4 4c4 4g4 4g4 4a4 4a4 2g4"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/beatsPerMinuteBox" />
+
+    <EditText
+      android:id="@+id/titleBox"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:ems="10"
+      android:hint="Song title..."
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+      android:id="@+id/beatsPerMinuteBox"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:ems="10"
+      android:hint="Beats per minute..."
+      android:inputType="number"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/titleBox" />
+  </android.support.constraint.ConstraintLayout>
+</LinearLayout>
