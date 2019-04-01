@@ -2,7 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:android="http://schemas.android.com/apk/res/android">
   <item
-    android:id="@+id/newSong"
+    android:id="@+id/newSongButton"
     android:icon="@drawable/add_button"
     android:title="New"
     app:showAsAction="always" />
@@ -14,5 +14,13 @@
   <item
     android:id="@+id/setRingtoneButton"
     android:title="Set as ringtone"
+    app:showAsAction="never" />
+  <item
+    android:id="@+id/deleteButton"
+    android:title="Delete song"
+    app:showAsAction="never" />
+  <item
+    android:id="@+id/clearDatabaseButton"
+    android:title="Clear database"
     app:showAsAction="never" />
 </menu>

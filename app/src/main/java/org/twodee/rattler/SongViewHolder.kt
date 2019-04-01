@@ -1,12 +1,12 @@
 package org.twodee.rattler
 
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 
 class SongViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-  private val textView: TextView = view.findViewById(android.R.id.text1)
+  private val textView: TextView = view.findViewById(R.id.text1)
 
   var isActive: Boolean = false
     set(value) {
