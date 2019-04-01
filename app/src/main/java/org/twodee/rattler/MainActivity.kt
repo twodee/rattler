@@ -49,7 +49,6 @@ class MainActivity : PermittedActivity() {
       override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
       override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
         song.title = titleBox.text.toString()
-        adapter.update()
       }
     })
 
@@ -58,7 +57,6 @@ class MainActivity : PermittedActivity() {
       override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
       override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
         song.notes = notesBox.text.toString()
-        adapter.update()
       }
     })
 
@@ -68,7 +66,6 @@ class MainActivity : PermittedActivity() {
       override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
         try {
           song.beatsPerMinute = beatsPerMinuteBox.text.toString().toInt()
-          adapter.update()
         } catch (e: NumberFormatException) {
         }
       }
@@ -109,7 +106,7 @@ class MainActivity : PermittedActivity() {
     animateEditor(1f, 0.3f)
   }
 
-  fun hideEditor() {
+  private fun hideEditor() {
     isEditorVisible = false
     animateEditor(0.3f, 1f)
   }
@@ -175,18 +172,6 @@ class MainActivity : PermittedActivity() {
       if (adapter.isSongSelected) {
         setRingtoneMaybe()
       }
-      true
-    }
-    R.id.newSongButton -> {
-      adapter.insert()
-      true
-    }
-    R.id.deleteButton -> {
-      adapter.delete()
-      true
-    }
-    R.id.clearDatabaseButton -> {
-      adapter.clear()
       true
     }
     else -> {

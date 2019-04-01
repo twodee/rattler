@@ -12,22 +12,16 @@ class SongAdapter(val context: Context) : RecyclerView.Adapter<SongViewHolder>()
   var onSelect: (Song) -> Unit = {}
   var onNothingSelected: () -> Unit = {}
 
-  var database: SongDatabase? = null
-    set(value) {
-      field = value
-      value?.let {
-        LoadSongsTask(it, this).execute()
-      }
-    }
-
-  init {
-    LoadDatabaseTask(this).execute()
-  }
-
   val isSongSelected: Boolean
-    get() = database != null && selectedIndex != RecyclerView.NO_POSITION
+    get() = selectedIndex != RecyclerView.NO_POSITION
 
-  var songs: MutableList<Song> = mutableListOf()
+  var songs: MutableList<Song> = mutableListOf(
+    Song("Mary Had", 120, "4c4 4c4 4g4 4g4 4a4 4a4 2g4"),
+    Song("Alex", 500, "4d5 32p 4d5 2d6 2a5 4p 2g#5 2g5 2f5 4d5 4f5 4g5 4c5 32p 4c5 2d6 2a5 4p 2g#5 2g5 2f5 4d5 4f5 4g5 4b4 32p 4b4 2d6 2a5 4p 2g#5 2g5 2f5 4d5 4f5 4g5 4a#4 32p 4a#4 2d6 2a5 4p 2g#5 2g5 2f5 4d5 4f5 4g5 2f5 32p 4f5 32p5 2f5 32p 2f5 32p 2f5 2d5 32p 2d5 4p 2d5 4f5 32p 4f5 32p 4f5 32p 2f5 2g5 2g#5 4g5 4f5 4d5 4f5 2g5 4p 2f5 32p 4f5 32p 2f5 2g5 2g#5 2a5 2c6 2a5 4p 2d6 32p 2d6 32p 4d6 4a5 4d6 1c6 1c6"),
+    Song("Ollie", 200, "4c4 4e4 4g4 4c5 4e5 4c5 4e5 4g5 4e5 4g5 2c6"),
+    Song("Tyler", 100, "16d5 16c#5 4d5 16d5 16c#5 4d5 16d5 16c#5 8e5 8d5 8c#5 4h4 16h4 16a4 4h4 16h4 16a4 4h4 16a4 16h4 8c#5 8d5 8a4 4h4"),
+    Song("James", 500, "g4 g4 a5 g4 g4 g4 a5 g4 g4 g4 a5 g4 g4 g4 a5 g4 e4 e4 f4 e4 e4 e4 f4 e4 e4 e4 f4 e4 e4 e4 f4 e4 c4 c4 a5 c4 c4 c4 a5 c4 c4 c4 a5 c4 c4 c4 a5 c4")
+  )
     set(value) {
       field = value
       notifyDataSetChanged()
@@ -65,42 +59,6 @@ class SongAdapter(val context: Context) : RecyclerView.Adapter<SongViewHolder>()
       onBindViewHolder(holder, position)
     } else {
       holder.song = songs[position]
-    }
-  }
-
-  fun insert() {
-    if (database != null) {
-      val song = Song("Untitled", 100, "")
-      songs.add(song)
-      selectIndex(songs.size - 1)
-      notifyItemInserted(songs.size - 1)
-
-      NewSongTask(database!!, song).execute()
-    }
-  }
-
-  fun clear() {
-    if (database != null) {
-      songs.clear()
-      notifyDataSetChanged()
-      ClearDatabaseTask(database!!).execute()
-      onNothingSelected()
-    }
-  }
-
-  fun update() {
-    if (isSongSelected) {
-      notifyItemChanged(selectedIndex, true)
-      UpdateSongTask(database!!, songs[selectedIndex]).execute()
-    }
-  }
-
-  fun delete() {
-    if (isSongSelected) {
-      val song = songs.removeAt(selectedIndex)
-      selectIndex(RecyclerView.NO_POSITION)
-      notifyItemRemoved(selectedIndex)
-      DeleteSongTask(database!!, song).execute()
     }
   }
 
